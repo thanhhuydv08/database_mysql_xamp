@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ClassConnectDataAll {
+public class ClassConnectDatabaseAll {
 	ResultSet resultSet;
 	public ResultSet  getInstance(String nameDB, String sqlQuery) throws ClassNotFoundException, SQLException {
 		

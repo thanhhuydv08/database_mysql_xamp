@@ -63,14 +63,14 @@ public class Frm_BT5_2 extends JFrame {
 		JButton btnLogin = new JButton("login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ClassConnectDataAll connect = new ClassConnectDataAll();
+				ClassConnectDatabaseAll connect = new ClassConnectDatabaseAll();
 				user = txtuser.getText();
 				pass = new String (txtPassword.getPassword());
 				sqlQuery = "select * from user where name='"+user+"'and password='"+pass+"'";// value phai nam trong dau '';
 				try {
 					resultSet=connect.getInstance("login", sqlQuery);
 					if(resultSet.next()) {
-						JOptionPane.showMessageDialog(rootPane,"Login cucess .");
+						JOptionPane.showMessageDialog(rootPane,"Login cucess");
 					}else {
 						JOptionPane.showMessageDialog(rootPane,"Fail!!");
 					}
