@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.ConnectDatabaseName;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -13,12 +16,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class Frm_BT5_2 extends JFrame {
 	ResultSet resultSet;
+	Connection connection;
+	String databaseName="abc";
     String user, pass, sqlQuery;
 	private JPanel contentPane;
 	private JTextField txtuser;
@@ -63,12 +70,15 @@ public class Frm_BT5_2 extends JFrame {
 		JButton btnLogin = new JButton("login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ClassConnectDatabaseAll connect = new ClassConnectDatabaseAll();
+				
 				user = txtuser.getText();
 				pass = new String (txtPassword.getPassword());
-				sqlQuery = "select * from user where name='"+user+"'and password='"+pass+"'";// value phai nam trong dau '';
+				String sql = "select * from user where name='"+user+"'and password='"+pass+"'";// value phai nam trong dau '';
 				try {
-					resultSet=connect.getInstance("login", sqlQuery);
+					ConnectDatabaseName connectDatabaseName = new ConnectDatabaseName();
+					connection= connectDatabaseName.ConnectDatabseCustom(databaseName);
+					Statement statement = connection.createStatement();
+					resultSet = statement.executeQuery(sqlQuery);
 					if(resultSet.next()) {
 						JOptionPane.showMessageDialog(rootPane,"Login cucess");
 					}else {
